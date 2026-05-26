@@ -6,8 +6,14 @@ Este serviço é um componente de apoio assíncrono e independente desenvolvido 
 
 ## 🏛️ Decisão Arquitetural & Justificativa
 
-Por se tratar de um serviço de apoio, optou-se por implementar uma **Arquitetura em Camadas (Layered Architecture)** adaptada para serviços do tipo *Worker/Consumer*, inspirada nos princípios de segregação de responsabilidades do ecossistema Spring/MVC.
+Por se tratar de um serviço de apoio e afim de evitar uma complexidade desnescessária, optou-se por implementar uma **Arquitetura em Camadas (Layered Architecture)** adaptada para serviços do tipo *Worker/Consumer*, inspirada nos princípios de segregação de responsabilidades do ecossistema Spring/MVC.
 
+### Prevenção ao *Overengineering* (Complexidade Desnecessária)
+Padrões como a *Hexagonal Architecture (Ports and Adapters)* ou *Clean Architecture* são excelentes para sistemas centrais complexos, onde as regras de negócio mudam frequentemente e precisam ser totalmente isoladas de frameworks externos. No entanto, para um microsserviço de auditoria focado em uma única responsabilidade (consumir, triar e persistir), aplicar esses padrões introduziria:
+* Excesso de interfaces e mapeadores de dados (mappers) redundantes.
+* Uma curva de aprendizado artificial que não traria retorno prático.
+* Maior volume de código para manter, sem ganho real de performance ou flexibilidade.
+  
 ### A Adaptação em Camadas (Layered)
 Para manter o projeto limpo, altamente testável e dentro das boas práticas do mercado, a estrutura foi dividida em três responsabilidades claras:
 
